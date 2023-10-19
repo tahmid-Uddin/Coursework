@@ -3,10 +3,10 @@
 #include <string.h>
 
 // Define an appropriate struct
-typedef struct {
+typedef struct records {
 	char date[11];
 	char time[6];
-	int steps;
+	char steps[];
 } FITNESS_DATA;
 
 // Define any additional variables here
@@ -43,6 +43,25 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
+    FILE *fptr;
+    fptr = fopen("FitnessData_2023.csv", "r");
+
+    char line[50];
+    char token[50];
+    int number_of_records = 0;
+    struct records data;
+
+    while (fgets(line, 50, fptr)) {
+        number_of_records++;
+        if (number_of_records <= 3) {
+            tokeniseRecord(line, ",", data.date, data.time, data.steps);
+
+            int length = 0;
+            printf("\n%s/%s/", data.date, data.time);
+            printf("%s%n", data.steps, &length);
+            printf("\nsteplength = %d", length);
+        }
+    }
 
 
 }
