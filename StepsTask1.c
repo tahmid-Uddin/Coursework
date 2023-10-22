@@ -6,7 +6,7 @@
 typedef struct records {
 	char date[11];
 	char time[6];
-	char steps[];
+	int steps;
 } FITNESS_DATA;
 
 // Define any additional variables here
@@ -43,25 +43,49 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
+
+    //Creates file pointer and opens file in read mode
     FILE *fptr;
     fptr = fopen("FitnessData_2023.csv", "r");
 
     char line[50];
-    char token[50];
     int number_of_records = 0;
-    struct records data;
 
-    while (fgets(line, 50, fptr)) {
+    // Counts the number of records in the input file
+    while (fgets(line, 50, fptr)) 
+    {
         number_of_records++;
-        if (number_of_records <= 3) {
-            tokeniseRecord(line, ",", data.date, data.time, data.steps);
-
-            int length = 0;
-            printf("\n%s/%s/", data.date, data.time);
-            printf("%s%n", data.steps, &length);
-            printf("\nsteplength = %d", length);
-        }
     }
 
+    fclose(fptr);
+
+
+    // Closes and re-opens fiel to reset pointer to the start of the file
+    fptr = fopen("FitnessData_2023.csv", "r");
+    struct records file_data[number_of_records];
+    char steps[10];
+    int stepsint;
+    int i = 0;
+
+    while (fgets(line, 50, fptr)) 
+    {
+        tokeniseRecord(line, ",", file_data[i].date, file_data[i].time, steps);
+
+        // Converts character array to integer
+        // https://stackoverflow.com/questions/10204471/convert-char-array-to-a-int-number-in-c
+        sscanf(steps, "%d", &stepsint);
+        
+        file_data[i].steps = stepsint;
+        i++;
+    }
+    
+    // Prints out the required information
+    printf("Number of records in file: %d\n", number_of_records);
+    
+    for (int j = 0; j < 3; j++) {
+        printf("%s/%s/%d\n", file_data[j].date, file_data[j].time, file_data[j].steps);
+    }
+
+    fclose(fptr);
 
 }
