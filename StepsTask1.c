@@ -48,11 +48,12 @@ int main() {
     FILE *fptr;
     fptr = fopen("FitnessData_2023.csv", "r");
 
-    char line[50];
+    int buffer = 50;
+    char line[buffer];
     int number_of_records = 0;
 
     // Counts the number of records in the input file
-    while (fgets(line, 50, fptr)) 
+    while (fgets(line, buffer, fptr)) 
     {
         number_of_records++;
     }
@@ -67,7 +68,7 @@ int main() {
     int stepsint;
     int i = 0;
 
-    while (fgets(line, 50, fptr)) 
+    while (fgets(line, buffer, fptr)) 
     {
         tokeniseRecord(line, ",", file_data[i].date, file_data[i].time, steps);
 
