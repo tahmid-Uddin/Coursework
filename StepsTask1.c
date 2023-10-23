@@ -71,11 +71,7 @@ int main() {
     while (fgets(line, buffer, fptr)) 
     {
         tokeniseRecord(line, ",", file_data[i].date, file_data[i].time, steps);
-
-        // Converts character array to integer
-        // https://stackoverflow.com/questions/10204471/convert-char-array-to-a-int-number-in-c
-        sscanf(steps, "%d", &stepsint);
-        
+        stepsint = atoi(steps);
         file_data[i].steps = stepsint;
         i++;
     }
