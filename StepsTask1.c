@@ -79,7 +79,7 @@ int main() {
     // Prints out the required information
     printf("Number of records in file: %d\n", number_of_records);
     
-    for (int j = 0; j < 59; j++) {
+    for (int j = 0; j < 3; j++) {
         printf("%s/%s/%d\n", file_data[j].date, file_data[j].time, file_data[j].steps);
     }
 
