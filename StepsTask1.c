@@ -3,7 +3,7 @@
 #include <string.h>
 
 // Define an appropriate struct
-typedef struct records {
+typedef struct {
 	char date[11];
 	char time[6];
 	int steps;
@@ -63,7 +63,7 @@ int main() {
 
     // Closes and re-opens fiel to reset pointer to the start of the file
     fptr = fopen("FitnessData_2023.csv", "r");
-    struct records file_data[number_of_records];
+    FITNESS_DATA file_data[number_of_records];
     char steps[10];
     int stepsint;
     int i = 0;
@@ -79,7 +79,7 @@ int main() {
     // Prints out the required information
     printf("Number of records in file: %d\n", number_of_records);
     
-    for (int j = 0; j < 3; j++) {
+    for (int j = 0; j < 59; j++) {
         printf("%s/%s/%d\n", file_data[j].date, file_data[j].time, file_data[j].steps);
     }
 
